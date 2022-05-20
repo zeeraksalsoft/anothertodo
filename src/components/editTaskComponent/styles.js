@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     },
     formViewStyle:{
         flex:1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 10
+        alignItems: 'stretch',
+        justifyContent: 'space-evenly',
+        padding: 10,
     },
     // addTaskViewStyle: {
     //     marginBottom: 7,
@@ -47,7 +47,12 @@ const styles = StyleSheet.create({
     timeSelectorViewStyle: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20
+        alignItems: 'stretch',
+        marginBottom: 10,
+        backgroundColor: 'white',
+        padding: 7,
+        marginTop: 5,
+
     },
     timeContainerStyle: {
         backgroundColor: '#F8F8F8',

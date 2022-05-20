@@ -16,7 +16,7 @@ const BottomTab = createBottomTabNavigator();
 const TabRoutes = () => {
     return(
         <BottomTab.Navigator
-            initialRouteName={navigationstrings.TODAYS_LIST}
+            initialRouteName={navigationstrings.HOME_STACK}
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
@@ -29,7 +29,7 @@ const TabRoutes = () => {
             }}
         >
             <BottomTab.Screen
-                name={navigationstrings.HOME}
+                name={navigationstrings.HOME_STACK}
                 component={HomeStack}
                 options={{
                         tabBarIcon: ({focused}) => (
@@ -54,7 +54,7 @@ const TabRoutes = () => {
                     }}
                 />
             <BottomTab.Screen
-                name={navigationstrings.TODAYS_LIST}
+                name={navigationstrings.TODAYS_LIST_STACK}
                 component={TodaysListStack}
                 options={{
                     tabBarIcon: ({focused}) => (

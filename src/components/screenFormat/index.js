@@ -12,12 +12,16 @@ const ScreenFormat = ({ backButton, heading, children }) => {
     
     return (
         <View style={styles.baseContainer}>
-            <View style={styles.backContainerStyle} >
-                <TouchableOpacity onPress={onPressBackButton}>
-                    <Image style={styles.backImageStyle} source={imagePath.icBack}/>
-                </TouchableOpacity>
-                <Text style={styles.backTextStyle}>Back</Text>
-            </View>
+            {
+                backButton ? 
+                <View style={styles.backContainerStyle} >
+                    <TouchableOpacity onPress={onPressBackButton}>
+                        <Image style={styles.backImageStyle} source={imagePath.icBack}/>
+                    </TouchableOpacity>
+                    <Text style={styles.backTextStyle}>Back</Text>
+                </View>
+                : null
+            }
             <Text style={styles.headingTextStyle}>{heading}</Text>
             <View style={styles.childContainerStyle}>
                 <Text style={styles.detailTextStyle}>Details</Text>

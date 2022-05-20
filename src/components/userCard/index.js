@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './styles';
 import imagePath from '../../constants/imagePath';
+import moment from 'moment';
 
 
 const UserCard = (props) => {
-    const findHeinght = (time) => {
+    const findHeight = (time) => {
         
     } 
     
@@ -16,7 +17,7 @@ const UserCard = (props) => {
                 <View style={{marginLeft: 10}}>
                     <Text style={styles.nameTextStyle}>{props.name? props.name: null}</Text>
                     <Text style={styles.taskTextStyle}>{props.title}</Text>
-                    <Text style={styles.timeTextStyle}>{props.time}</Text>
+                    <Text style={styles.timeTextStyle}>{moment(props.startTime).format("ddd, MMM Do, h:mm a")} - {moment(props.endTime).format("ddd, MMM Do, h:mm a")}</Text>
                 </View>
             </View>
             

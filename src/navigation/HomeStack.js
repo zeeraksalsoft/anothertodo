@@ -10,7 +10,7 @@ const HomeStack = ({navigation}) => {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name={navigationstrings.HOME} component={Home}/>
-            <Stack.Screen name={navigationstrings.TODAYS_CALENDER} component={TodaysCalenderStack}/>
+            <Stack.Screen name={navigationstrings.TODAYS_CALENDER_STACK} component={TodaysCalenderStack}/>
         </Stack.Navigator>
     );
 };

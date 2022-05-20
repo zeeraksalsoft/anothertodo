@@ -8,7 +8,7 @@ const MainNavigator = () => {
     return (
         <MainStack.Navigator>
             <MainStack.Screen
-                name={navigationstrings.TODAYS_LIST}
+                name={navigationstrings.TAB_ROUTES}
                 component={TabRoutes}
                 options={{headerShown: false}}
             />

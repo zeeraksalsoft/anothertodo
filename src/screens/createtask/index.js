@@ -3,11 +3,12 @@ import EditTaskComponent from '../../components/editTaskComponent';
 import firestore from '@react-native-firebase/firestore';
 import { AuthContext } from '../../navigation/AuthProvider';
 import { firebase } from '@react-native-firebase/auth';
+import {Alert} from 'react-native';
 
 const addTaskToDatabase = async (title, person, startTime, endTime, color, repeat, addTag, attachFile, notes) => {
 
     const currentUser = firebase.auth().currentUser;
-    firestore()
+    await firestore()
     .collection(currentUser.uid)
     .add({
         title: title,
@@ -19,10 +20,12 @@ const addTaskToDatabase = async (title, person, startTime, endTime, color, repea
         addTag: addTag,
         attachFile: attachFile,
         notes: notes,
-        addedTime: Date()
+        addedTime: Date(),
+        isDone: false,
     })
     .then(() => {
         console.log('post added');
+        navigation.goBack();
         Alert.alert(
             'Task Added!'
         )
@@ -30,14 +33,24 @@ const addTaskToDatabase = async (title, person, startTime, endTime, color, repea
     .catch((error) => {
         console.log(error);
     })
-}
+}   
 
-const CreateTask = ({navigation}) => {
+const CreateTask = ({ navigation }) => {
 
     return (
         <EditTaskComponent
             onDone={
-                (uid, title, startTime, endTime, person, addedTime) => addTaskToDatabase(uid, title, startTime, endTime, person, addedTime)
+                (title, person, startTime, endTime, color, repeat, addTag, attachFile, notes) => addTaskToDatabase(
+                    title,
+                    person,
+                    startTime,
+                    endTime,
+                    color,
+                    repeat,
+                    addTag,
+                    attachFile,
+                    notes
+                )
             }
             onCancel={
                 () => navigation.goBack()
