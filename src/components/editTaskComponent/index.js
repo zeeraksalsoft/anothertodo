@@ -4,6 +4,7 @@ import styles from './styles';
 import { Formik } from 'formik';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const EditTaskComponent = (props) => {
 
@@ -90,146 +91,147 @@ const EditTaskComponent = (props) => {
     // console.log(initialValues.person)
     // console.log(initialValues.notes)
     return (
-        <View style={styles.baseContainer}>
-            <Formik
-                initialValues={
-                props.initialValue
-                ?
-                {
-                    title: props.initialValue.title,
-                    person: props.initialValue.person,
-                    start: props.initialValue.startTime,
-                    end: props.initialValue.endTime,
-                    color: props.initialValue.color,
-                    repeat: props.initialValue.repeat,
-                    addTag: props.initialValue.addTag,
-                    attachFile: props.initialValue.attachFile,
-                    notes: props.initialValue.notes
+        <KeyboardAwareScrollView style={styles.baseContainer}>
+            <View>
+                <Formik
+                    initialValues={
+                    props.initialValue
+                    ?
+                    {
+                        title: props.initialValue.title,
+                        person: props.initialValue.person,
+                        start: props.initialValue.startTime,
+                        end: props.initialValue.endTime,
+                        color: props.initialValue.color,
+                        repeat: props.initialValue.repeat,
+                        addTag: props.initialValue.addTag,
+                        attachFile: props.initialValue.attachFile,
+                        notes: props.initialValue.notes
+                    }
+                    :
+                    {
+                        title: '',
+                        person: '',
+                        start: startDate,
+                        end: endDate,
+                        color: 'blue',
+                        repeat: false,
+                        addTag: null,
+                        attachFile: null,
+                        notes: ''
+                    }
                 }
-                :
-                {
-                    title: '',
-                    person: '',
-                    start: startDate,
-                    end: endDate,
-                    color: 'blue',
-                    repeat: false,
-                    addTag: null,
-                    attachFile: null,
-                    notes: ''
-                }
-            }
-                onSubmit={(values) => {
-                    console.log("start date in formik onSubmit: ",startDate)
-                    console.log("end Date formik onsubmit: ", endDate)
-                    onDoneButton(values.title, values.person, startDate, endDate, values.color, values.repeat, values.addTag, values.attachFile, values.notes);
-                }}
-            >
-                {(formikprops) => (
-                    <View style={styles.formViewStyle}>
-                        <View style={styles.headerViewStyle}>
-                            <TouchableOpacity onPress={onCancelButton}>
-                                <Text style={styles.cancelTextStyle}>Cancel</Text>
-                            </TouchableOpacity>
-                            <Text style={styles.headerTextStyle}>New Task</Text>
-                            <TouchableOpacity onPress={formikprops.handleSubmit}>
-                                <Text>Done</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <TextInput
-                            style={styles.titleInputStyle}
-                            placeholder='Title'
-                            onChangeText={formikprops.handleChange('title')}
-                            value={formikprops.values.title}
-                        />
-                        <TextInput
-                            style={styles.titleInputStyle}
-                            placeholder='Person'
-                            onChangeText={formikprops.handleChange('person')}
-                            value={formikprops.values.person}
-                        />
-                        <View style={styles.timeSelectorViewStyle}>
-                            <View>
-                                <Text>Start</Text>
-                                <TouchableOpacity onPress={showStartDatePicker}>
-                                    <View style={styles.timeContainerStyle}>
-                                        <Text style={styles.timeTextStyle}>{startDate.toLocaleString('en-us',{ month: 'short', dateStyle: 'short' })}</Text>
-                                    </View>
+                    onSubmit={(values) => {
+                        console.log("start date in formik onSubmit: ",startDate)
+                        console.log("end Date formik onsubmit: ", endDate)
+                        onDoneButton(values.title, values.person, startDate, endDate, values.color, values.repeat, values.addTag, values.attachFile, values.notes);
+                    }}
+                >
+                    {(formikprops) => (
+                        <View style={styles.formViewStyle}>
+                            <View style={styles.headerViewStyle}>
+                                <TouchableOpacity onPress={onCancelButton}>
+                                    <Text style={styles.cancelTextStyle}>Cancel</Text>
                                 </TouchableOpacity>
-                                <DateTimePickerModal
-                                    onConfirm={handleConfirmStartDate}
-                                    onCancel={hideStartDatePicker}
-                                    isVisible={isStartDatePickerVisible}
-                                    mode="datetime"
-                                    // value={formikprops.values.start}
-                                />
-                            </View>
-                            {/* <View>
-                                <Text>Duration</Text>
-                                <View style={styles.timeContainerStyle}>
-                                    <Text style={styles.timeTextStyle}>a</Text>
-                                </View>
-                            </View> */}
-                            <View>
-                                <Text>End</Text>
-                                <TouchableOpacity onPress={showEndDatePicker}>
-                                    <View style={styles.timeContainerStyle}>
-                                        <Text style={styles.timeTextStyle}>{endDate.toLocaleString('en-us',{ month: 'short', dateStyle: 'short' })}</Text>
-                                    </View>
+                                <Text style={styles.headerTextStyle}>New Task</Text>
+                                <TouchableOpacity onPress={formikprops.handleSubmit}>
+                                    <Text>Done</Text>
                                 </TouchableOpacity>
-                                <DateTimePickerModal
-                                    onConfirm={handleConfirmEndDate}
-                                    onCancel={hideEndDatePicker}
-                                    isVisible={isEndDatePickerVisible}
-                                    mode="datetime"
-                                    // value={formikprops.values.end}
-                                />
                             </View>
-                        </View>
-                        <View style={styles.optionsSubView}>
-                            <View style={styles.optionsView}>
+                            <TextInput
+                                style={styles.titleInputStyle}
+                                placeholder='Title'
+                                onChangeText={formikprops.handleChange('title')}
+                                value={formikprops.values.title}
+                            />
+                            <TextInput
+                                style={styles.titleInputStyle}
+                                placeholder='Person'
+                                onChangeText={formikprops.handleChange('person')}
+                                value={formikprops.values.person}
+                            />
+                            <View style={styles.timeSelectorViewStyle}>
                                 <View>
-                                    <View style={styles.colorComponentStyle}>
-                                        <View style={styles.colorContainerStyle}></View>
+                                    <Text>Start</Text>
+                                    <TouchableOpacity onPress={showStartDatePicker}>
+                                        <View style={styles.timeContainerStyle}>
+                                            <Text style={styles.timeTextStyle}>{startDate.toLocaleString('en-us',{ month: 'short', dateStyle: 'short' })}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <DateTimePickerModal
+                                        onConfirm={handleConfirmStartDate}
+                                        onCancel={hideStartDatePicker}
+                                        isVisible={isStartDatePickerVisible}
+                                        mode="datetime"
+                                        // value={formikprops.values.start}
+                                    />
+                                </View>
+                                {/* <View>
+                                    <Text>Duration</Text>
+                                    <View style={styles.timeContainerStyle}>
+                                        <Text style={styles.timeTextStyle}>a</Text>
+                                    </View>
+                                </View> */}
+                                <View>
+                                    <Text>End</Text>
+                                    <TouchableOpacity onPress={showEndDatePicker}>
+                                        <View style={styles.timeContainerStyle}>
+                                            <Text style={styles.timeTextStyle}>{endDate.toLocaleString('en-us',{ month: 'short', dateStyle: 'short' })}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <DateTimePickerModal
+                                        onConfirm={handleConfirmEndDate}
+                                        onCancel={hideEndDatePicker}
+                                        isVisible={isEndDatePickerVisible}
+                                        mode="datetime"
+                                        // value={formikprops.values.end}
+                                    />
+                                </View>
+                            </View>
+                            <View style={styles.optionsSubView}>
+                                <View style={styles.optionsView}>
+                                    {/* <View>
+                                        <View style={styles.colorComponentStyle}>
+                                            <View style={styles.colorContainerStyle}></View>
+                                            <TouchableOpacity>
+                                                <Text>Blue</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </View>
+                                    <View style={styles.sepratorStyle}></View> */}
+                                    <View style={styles.eachOptionView}>
                                         <TouchableOpacity>
-                                            <Text>Blue</Text>
+                                            <Text>Repeat</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.sepratorStyle}></View>
+                                    <View style={styles.eachOptionView}>
+                                        <TouchableOpacity>
+                                            <Text>Add tag</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.sepratorStyle}></View>
+                                    <View style={styles.eachOptionView}>
+                                        <TouchableOpacity>
+                                            <Text>Attach file</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                                <View style={styles.sepratorStyle}></View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Text>Repeat</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.sepratorStyle}></View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Text>Add tag</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.sepratorStyle}></View>
-                                <View>
-                                    <TouchableOpacity>
-                                        <Text>Attach file</Text>
-                                    </TouchableOpacity>
-                                </View>
+                            </View>
+                            <View style={styles.notesFormViewStyle}>
+                                <TextInput
+                                    multiline
+                                    style={styles.notesInputStyle}
+                                    placeholder='Notes'
+                                    onChangeText={formikprops.handleChange('notes')}
+                                    value={formikprops.values.notes}
+                                />
                             </View>
                         </View>
-                        <View style={styles.notesFormViewStyle}>
-                            <TextInput
-                                multiline
-                                style={styles.notesInputStyle}
-                                placeholder='Notes'
-                                onChangeText={formikprops.handleChange('notes')}
-                                value={formikprops.values.notes}
-                            />
-                        </View>
-                    </View>
-                )}
-            </Formik>
-        </View>
-       
+                    )}
+                </Formik>
+            </View>
+        </KeyboardAwareScrollView>
     );
 };
 

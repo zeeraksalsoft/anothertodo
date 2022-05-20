@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Dimensions, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Dimensions, FlatList, SafeAreaView } from 'react-native';
 import imagePath from '../../constants/imagePath';
 import styles from './styles';
 import navigationstrings from '../../constants/navigationstrings';
@@ -12,6 +12,7 @@ import firestore from '@react-native-firebase/firestore';
 import { ProgressCircle } from 'react-native-svg-charts'
 import moment from 'moment';
 import { useFocusEffect } from '@react-navigation/native';
+
 
 const TodaysList = ({navigation}) => {
 
@@ -197,7 +198,7 @@ const TodaysList = ({navigation}) => {
           }}
         />
         
-        <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+        <View >
           {
             loading
             ?
@@ -207,13 +208,13 @@ const TodaysList = ({navigation}) => {
               </Text>
             </View>
             :
-            // <ProgressCircle style={{ height: 200 }} progress={0.7} progressColor={'rgb(134, 65, 244)'} />
             <ProgressChart
               data={progressData}
               width={screenWidth}
               height={130}
               hideLegend={false}
-              strokeWidth={10}
+              
+              strokeWidth={12}
               radius={30}
               chartConfig={{
                   backgroundColor: '#E7EBF5',
@@ -222,9 +223,9 @@ const TodaysList = ({navigation}) => {
                   color: (opacity = 0.5) => `rgba(110, 0, 150, ${opacity})`,
               }}
               style= {{
-                  borderRadius: 15,
+                
               }}
-          />
+            />
           }
         </View>
         <View style={styles.listViewStyle}>

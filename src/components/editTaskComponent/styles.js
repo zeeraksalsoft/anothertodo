@@ -3,9 +3,10 @@ import colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
     baseContainer: {
-        flex:1,
+        // flex:1,
         backgroundColor: colors.BASECOLOR,
-        justifyContent: 'space-between'
+        padding: 8
+        // justifyContent: 'space-between'
     },
     subViewStyle: {
         backgroundColor: 'white',
@@ -18,6 +19,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 15,
+        paddingHorizontal: 5,
+        borderRadius: 5
     },
     headerTextStyle: {
         fontSize: 15,
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
     formViewStyle:{
         flex:1,
         alignItems: 'stretch',
-        justifyContent: 'space-evenly',
+        // justifyContent: 'space-evenly',
         padding: 10,
     },
     // addTaskViewStyle: {
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 7,
         marginTop: 5,
-
+        borderRadius: 10,
     },
     timeContainerStyle: {
         backgroundColor: '#F8F8F8',
@@ -70,29 +73,40 @@ const styles = StyleSheet.create({
         fontWeight: '500'
     },
     optionsView: {
-        flex: 0.8,
+        flex: 1,
         marginBottom: 20,
         paddingHorizontal: 10,
-        justifyContent: 'space-evenly' ,
+        // width: '100%',
+        // justifyContent: 'space-evenly' ,
         backgroundColor: 'white',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 10
     },
     optionsSubView:{
-        justifyContent: 'space-evenly',
-        flex: 1,
+        // justifyContent: 'space-evenly',
+        // flex: 1,
         width: '100%'
+    },
+    eachOptionView : {
+        backgroundColor: 'white',
+        paddingHorizontal: 5,
+        paddingVertical: 8,
+        borderRadius: 10
     },
     notesFormViewStyle: {
         flex:1,
         padding: 10,
         backgroundColor: 'white',
-        width: '100%'
+        width: '100%',
+        paddingBottom: '100%',
+        borderRadius: 10,
     },
     notesInputStyle: {
-        
+        flex: 1
     },
     optionComponentViewStyle:{
-
+        
     },
     sepratorStyle: {
         backgroundColor: '#d1d1d1',

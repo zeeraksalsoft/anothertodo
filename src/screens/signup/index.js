@@ -1,6 +1,6 @@
 //import liraries
 import React, {useContext, useState} from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import CustomForm from '../../components/form';
 import { AuthContext } from '../../navigation/AuthProvider';
 import styles from './styles';
@@ -13,10 +13,23 @@ const Signup = ({navigation}) => {
     const [loading, setLoading] = useState(false);
 
     const pressingButton = async (email, password) => {
-        setLoading(true);
-        await signup(email, password);
-        if(!user){
-            setLoading(false);
+        if(user==null){
+            setLoading(true);
+            try{
+                await signup(email, password);
+                if(user!=null){
+                    setLoading(false);
+                }
+            } catch(e) {
+                console.log("Login caught error: ", e)
+                setLoading(false);
+                Alert.alert(
+                    "In valid credentials",
+                    "Please enter correct email and password",
+                    [{text: "Ok"}],
+                    {cancellable: true}
+                )
+            }
         }
     }
     
@@ -26,7 +39,9 @@ const Signup = ({navigation}) => {
                 {
                     loading
                     ?
-                    <ActivityIndicator size="large"/>
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <ActivityIndicator size="large"/>
+                    </View>
                     :
                     <>
                         <CustomForm heading="Signup" onPressButton={(email, password) => pressingButton(email, password)}/> 

@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
       flex: 1,
       borderTopStartRadius: 30,
       borderTopEndRadius: 30,
-      padding: 30,
+      paddingHorizontal: 40,
+      paddingBottom: '10%',
       backgroundColor: 'white',
       width: '100%',
     },
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center'
     },
     headingText: {
+      marginTop: 30,
       fontFamily: 'Cochin',
       paddingBottom: 80,
       fontSize: 50,

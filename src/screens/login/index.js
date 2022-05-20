@@ -11,25 +11,41 @@ import { loadPartialConfig } from '@babel/core';
 
 // create a component
 const Login = ({ navigation }) => {
-    const { login, user } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
 
     const pressingButton = async (email, password) => {
-        setLoading(true);
-        await login(email, password);
-        if(!user){
-            setLoading(false);
+        if(user==null){
+            setLoading(true);
+            try{
+                await login(email, password);
+                if(user!=null){
+                    setLoading(false);
+                }
+            } catch(e) {
+                console.log("Login caught error: ", e)
+                setLoading(false);
+                Alert.alert(
+                    "In valid credentials",
+                    "Please enter correct email and password",
+                    [{text: "Ok"}],
+                    {cancellable: true}
+                )
+            }
         }
     }
 
     return (
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView style={styles.scrollView}>
             <View style={styles.container}>
                 {
                     loading?
-                    <ActivityIndicator size="large"/>
+                    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                        <ActivityIndicator size="large"/>
+                    </View> 
                     :
-                    <View>
+                    <View style={styles.container}>
                         <CustomForm heading="Login" forgot="Forgot password?" onPressButton={(email, passwrod) => pressingButton(email, passwrod)}/>
                         <View style={styles.currentScreenView}>
                             <Text>Don't have an account?</Text>
